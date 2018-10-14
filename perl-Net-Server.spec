@@ -4,21 +4,17 @@
 #
 Name     : perl-Net-Server
 Version  : 2.009
-Release  : 1
+Release  : 2
 URL      : https://cpan.metacpan.org/authors/id/R/RH/RHANDOM/Net-Server-2.009.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RH/RHANDOM/Net-Server-2.009.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libn/libnet-server-perl/libnet-server-perl_2.009-1.debian.tar.xz
 Summary  : 'Extensible Perl internet server'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
-Requires: perl-Net-Server-bin
-Requires: perl-Net-Server-license
-Requires: perl-Net-Server-man
-Requires: perl(IO::Multiplex)
-Requires: perl(IO::Socket::INET6)
-Requires: perl(IO::Socket::SSL)
-Requires: perl(Net::SSLeay)
-Requires: perl(Socket6)
+Requires: perl-Net-Server-bin = %{version}-%{release}
+Requires: perl-Net-Server-license = %{version}-%{release}
+Requires: perl-Net-Server-man = %{version}-%{release}
+BuildRequires : buildreq-cpan
 BuildRequires : perl(IO::Multiplex)
 BuildRequires : perl(IO::Socket::INET6)
 BuildRequires : perl(IO::Socket::SSL)
@@ -35,11 +31,21 @@ package MyPackage;
 %package bin
 Summary: bin components for the perl-Net-Server package.
 Group: Binaries
-Requires: perl-Net-Server-license
-Requires: perl-Net-Server-man
+Requires: perl-Net-Server-license = %{version}-%{release}
+Requires: perl-Net-Server-man = %{version}-%{release}
 
 %description bin
 bin components for the perl-Net-Server package.
+
+
+%package dev
+Summary: dev components for the perl-Net-Server package.
+Group: Development
+Requires: perl-Net-Server-bin = %{version}-%{release}
+Provides: perl-Net-Server-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-Net-Server package.
 
 
 %package license
@@ -59,10 +65,10 @@ man components for the perl-Net-Server package.
 
 
 %prep
-tar -xf %{SOURCE1}
-cd ..
 %setup -q -n Net-Server-2.009
-mkdir -p %{_topdir}/BUILD/Net-Server-2.009/deblicense/
+cd ..
+%setup -q -T -D -n Net-Server-2.009 -b 1
+mkdir -p deblicense/
 mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Net-Server-2.009/deblicense/
 
 %build
@@ -87,13 +93,13 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/perl-Net-Server
-cp LICENSE %{buildroot}/usr/share/doc/perl-Net-Server/LICENSE
-cp deblicense/copyright %{buildroot}/usr/share/doc/perl-Net-Server/deblicense_copyright
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-Net-Server
+cp LICENSE %{buildroot}/usr/share/package-licenses/perl-Net-Server/LICENSE
+cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Net-Server/deblicense_copyright
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -102,41 +108,35 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/Net/Server.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server.pod
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/Daemonize.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/Fork.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/HTTP.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/INET.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/Log/Log/Log4perl.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/Log/Sys/Syslog.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/MultiType.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/Multiplex.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/PSGI.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/PreFork.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/PreForkSimple.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/Proto.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/Proto/SSL.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/Proto/SSLEAY.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/Proto/TCP.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/Proto/UDP.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/Proto/UNIX.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/Proto/UNIXDGRAM.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/SIG.pm
-/usr/lib/perl5/site_perl/5.26.1/Net/Server/Single.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server.pod
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/Daemonize.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/Fork.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/HTTP.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/INET.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/Log/Log/Log4perl.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/Log/Sys/Syslog.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/MultiType.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/Multiplex.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/PSGI.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/PreFork.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/PreForkSimple.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/Proto.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/Proto/SSL.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/Proto/SSLEAY.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/Proto/TCP.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/Proto/UDP.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/Proto/UNIX.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/Proto/UNIXDGRAM.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/SIG.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/Server/Single.pm
 
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/net-server
 
-%files license
+%files dev
 %defattr(-,root,root,-)
-/usr/share/doc/perl-Net-Server/LICENSE
-/usr/share/doc/perl-Net-Server/deblicense_copyright
-
-%files man
-%defattr(-,root,root,-)
-/usr/share/man/man1/net-server.1
 /usr/share/man/man3/Net::Server.3
 /usr/share/man/man3/Net::Server::Daemonize.3
 /usr/share/man/man3/Net::Server::Fork.3
@@ -158,3 +158,12 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 /usr/share/man/man3/Net::Server::Proto::UNIXDGRAM.3
 /usr/share/man/man3/Net::Server::SIG.3
 /usr/share/man/man3/Net::Server::Single.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-Net-Server/LICENSE
+/usr/share/package-licenses/perl-Net-Server/deblicense_copyright
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/net-server.1
