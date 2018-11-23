@@ -4,7 +4,7 @@
 #
 Name     : perl-Net-Server
 Version  : 2.009
-Release  : 3
+Release  : 4
 URL      : https://cpan.metacpan.org/authors/id/R/RH/RHANDOM/Net-Server-2.009.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RH/RHANDOM/Net-Server-2.009.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libn/libnet-server-perl/libnet-server-perl_2.009-1.debian.tar.xz
