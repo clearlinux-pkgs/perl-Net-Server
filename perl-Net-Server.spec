@@ -4,11 +4,11 @@
 #
 Name     : perl-Net-Server
 Version  : 2.009
-Release  : 10
+Release  : 11
 URL      : https://cpan.metacpan.org/authors/id/R/RH/RHANDOM/Net-Server-2.009.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RH/RHANDOM/Net-Server-2.009.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libn/libnet-server-perl/libnet-server-perl_2.009-1.debian.tar.xz
-Summary  : 'Extensible Perl internet server'
+Summary  : Extensible, general Perl server engine
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Net-Server-bin = %{version}-%{release}
@@ -32,7 +32,6 @@ package MyPackage;
 Summary: bin components for the perl-Net-Server package.
 Group: Binaries
 Requires: perl-Net-Server-license = %{version}-%{release}
-Requires: perl-Net-Server-man = %{version}-%{release}
 
 %description bin
 bin components for the perl-Net-Server package.
@@ -43,6 +42,7 @@ Summary: dev components for the perl-Net-Server package.
 Group: Development
 Requires: perl-Net-Server-bin = %{version}-%{release}
 Provides: perl-Net-Server-devel = %{version}-%{release}
+Requires: perl-Net-Server = %{version}-%{release}
 
 %description dev
 dev components for the perl-Net-Server package.
@@ -69,7 +69,7 @@ man components for the perl-Net-Server package.
 cd ..
 %setup -q -T -D -n Net-Server-2.009 -b 1
 mkdir -p deblicense/
-mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Net-Server-2.009/deblicense/
+cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Net-Server-2.009/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
@@ -83,13 +83,6 @@ else
 %{__perl} Build.PL
 ./Build
 fi
-
-%check
-export LANG=C
-export http_proxy=http://127.0.0.1:9/
-export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost,127.0.0.1,0.0.0.0
-make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
