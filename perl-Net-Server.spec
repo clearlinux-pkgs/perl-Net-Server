@@ -4,16 +4,17 @@
 #
 Name     : perl-Net-Server
 Version  : 2.009
-Release  : 11
+Release  : 12
 URL      : https://cpan.metacpan.org/authors/id/R/RH/RHANDOM/Net-Server-2.009.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RH/RHANDOM/Net-Server-2.009.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libn/libnet-server-perl/libnet-server-perl_2.009-1.debian.tar.xz
-Summary  : Extensible, general Perl server engine
+Summary  : 'Extensible Perl internet server'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Net-Server-bin = %{version}-%{release}
 Requires: perl-Net-Server-license = %{version}-%{release}
 Requires: perl-Net-Server-man = %{version}-%{release}
+Requires: perl-Net-Server-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : perl(IO::Multiplex)
 BuildRequires : perl(IO::Socket::INET6)
@@ -64,18 +65,28 @@ Group: Default
 man components for the perl-Net-Server package.
 
 
+%package perl
+Summary: perl components for the perl-Net-Server package.
+Group: Default
+Requires: perl-Net-Server = %{version}-%{release}
+
+%description perl
+perl components for the perl-Net-Server package.
+
+
 %prep
 %setup -q -n Net-Server-2.009
-cd ..
-%setup -q -T -D -n Net-Server-2.009 -b 1
+cd %{_builddir}
+tar xf %{_sourcedir}/libnet-server-perl_2.009-1.debian.tar.xz
+cd %{_builddir}/Net-Server-2.009
 mkdir -p deblicense/
-cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Net-Server-2.009/deblicense/
+cp -r %{_builddir}/debian/* %{_builddir}/Net-Server-2.009/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -87,8 +98,8 @@ fi
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Net-Server
-cp LICENSE %{buildroot}/usr/share/package-licenses/perl-Net-Server/LICENSE
-cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Net-Server/deblicense_copyright
+cp %{_builddir}/Net-Server-2.009/LICENSE %{buildroot}/usr/share/package-licenses/perl-Net-Server/6a46f020518712218285db3d5cf9f95d9fd06021
+cp %{_builddir}/Net-Server-2.009/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Net-Server/6b2a02adbb5bd51a9109d92046816596279f53fd
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -101,28 +112,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server.pod
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/Daemonize.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/Fork.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/HTTP.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/INET.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/Log/Log/Log4perl.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/Log/Sys/Syslog.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/MultiType.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/Multiplex.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/PSGI.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/PreFork.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/PreForkSimple.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/Proto.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/Proto/SSL.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/Proto/SSLEAY.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/Proto/TCP.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/Proto/UDP.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/Proto/UNIX.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/Proto/UNIXDGRAM.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/SIG.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Net/Server/Single.pm
 
 %files bin
 %defattr(-,root,root,-)
@@ -154,9 +143,34 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-Net-Server/LICENSE
-/usr/share/package-licenses/perl-Net-Server/deblicense_copyright
+/usr/share/package-licenses/perl-Net-Server/6a46f020518712218285db3d5cf9f95d9fd06021
+/usr/share/package-licenses/perl-Net-Server/6b2a02adbb5bd51a9109d92046816596279f53fd
 
 %files man
 %defattr(0644,root,root,0755)
 /usr/share/man/man1/net-server.1
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server.pod
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Daemonize.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Fork.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/HTTP.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/INET.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Log/Log/Log4perl.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Log/Sys/Syslog.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/MultiType.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Multiplex.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/PSGI.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/PreFork.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/PreForkSimple.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Proto.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Proto/SSL.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Proto/SSLEAY.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Proto/TCP.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Proto/UDP.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Proto/UNIX.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Proto/UNIXDGRAM.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/SIG.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Single.pm
