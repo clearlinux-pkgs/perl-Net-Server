@@ -4,7 +4,7 @@
 #
 Name     : perl-Net-Server
 Version  : 2.009
-Release  : 12
+Release  : 13
 URL      : https://cpan.metacpan.org/authors/id/R/RH/RHANDOM/Net-Server-2.009.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RH/RHANDOM/Net-Server-2.009.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libn/libnet-server-perl/libnet-server-perl_2.009-1.debian.tar.xz
@@ -99,7 +99,7 @@ fi
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Net-Server
 cp %{_builddir}/Net-Server-2.009/LICENSE %{buildroot}/usr/share/package-licenses/perl-Net-Server/6a46f020518712218285db3d5cf9f95d9fd06021
-cp %{_builddir}/Net-Server-2.009/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Net-Server/6b2a02adbb5bd51a9109d92046816596279f53fd
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-Net-Server/6b2a02adbb5bd51a9109d92046816596279f53fd
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -152,25 +152,25 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server.pod
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Daemonize.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Fork.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/HTTP.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/INET.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Log/Log/Log4perl.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Log/Sys/Syslog.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/MultiType.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Multiplex.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/PSGI.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/PreFork.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/PreForkSimple.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Proto.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Proto/SSL.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Proto/SSLEAY.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Proto/TCP.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Proto/UDP.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Proto/UNIX.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Proto/UNIXDGRAM.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/SIG.pm
-/usr/lib/perl5/vendor_perl/5.30.1/Net/Server/Single.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server.pod
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/Daemonize.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/Fork.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/HTTP.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/INET.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/Log/Log/Log4perl.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/Log/Sys/Syslog.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/MultiType.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/Multiplex.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/PSGI.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/PreFork.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/PreForkSimple.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/Proto.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/Proto/SSL.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/Proto/SSLEAY.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/Proto/TCP.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/Proto/UDP.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/Proto/UNIX.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/Proto/UNIXDGRAM.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/SIG.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/Server/Single.pm
