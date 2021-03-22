@@ -1,6 +1,0 @@
-2.009
-perl(IO::Multiplex)
-perl(IO::Socket::INET6)
-perl(IO::Socket::SSL)
-perl(Net::SSLeay)
-perl(Socket6)
