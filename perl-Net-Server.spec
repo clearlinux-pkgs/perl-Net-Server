@@ -4,7 +4,7 @@
 #
 Name     : perl-Net-Server
 Version  : 2.010
-Release  : 17
+Release  : 18
 URL      : https://cpan.metacpan.org/authors/id/R/RH/RHANDOM/Net-Server-2.010.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RH/RHANDOM/Net-Server-2.010.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libn/libnet-server-perl/libnet-server-perl_2.009-1.debian.tar.xz
@@ -147,25 +147,25 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server.pod
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/Daemonize.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/Fork.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/HTTP.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/INET.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/Log/Log/Log4perl.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/Log/Sys/Syslog.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/MultiType.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/Multiplex.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/PSGI.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/PreFork.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/PreForkSimple.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/Proto.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/Proto/SSL.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/Proto/SSLEAY.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/Proto/TCP.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/Proto/UDP.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/Proto/UNIX.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/Proto/UNIXDGRAM.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/SIG.pm
-/usr/lib/perl5/vendor_perl/5.32.1/Net/Server/Single.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server.pod
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/Daemonize.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/Fork.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/HTTP.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/INET.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/Log/Log/Log4perl.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/Log/Sys/Syslog.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/MultiType.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/Multiplex.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/PSGI.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/PreFork.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/PreForkSimple.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/Proto.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/Proto/SSL.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/Proto/SSLEAY.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/Proto/TCP.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/Proto/UDP.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/Proto/UNIX.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/Proto/UNIXDGRAM.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/SIG.pm
+/usr/lib/perl5/vendor_perl/5.34.0/Net/Server/Single.pm
